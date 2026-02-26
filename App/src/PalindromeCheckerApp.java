@@ -1,13 +1,25 @@
-public class UseCase2PalindromeCheckerApp {
+public class PallindromeCheckerApp {
 
     public static void main(String[] args) {
+
+
         String input = "madam";
+
+
+        char[] characters = input.toCharArray();
+
+
+        int start = 0;
+        int end = characters.length - 1;
         boolean isPalindrome = true;
-        for (int i = 0; i < input.length() / 2; i++) {
-            if (input.charAt(i) != input.charAt(input.length() - 1 - i)) {
+
+        while (start < end) {
+            if (characters[start] != characters[end]) {
                 isPalindrome = false;
                 break;
             }
+            start++;
+            end--;
         }
         System.out.println("Input text: " + input);
         System.out.println("Is it a Palindrome? : " + isPalindrome);
