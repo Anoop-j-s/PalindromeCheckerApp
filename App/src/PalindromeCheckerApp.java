@@ -2,23 +2,42 @@ import java.util.*;
 
 public class pallindromeapp {
     static void main() {
-        String input = "A man a plan a canal Panama";
+        String input = "level";
 
-        // Normalize the string
-        String normalized = input.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+        PalindromeStrategy strategy = new StackStrategy();
 
-        boolean isPalindrome = true;
+        boolean result = strategy.check(input);
 
-        // Compare characters from both ends
-        for (int i = 0; i < normalized.length() / 2; i++) {
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
+    }
+}
 
-            if (normalized.charAt(i) != normalized.charAt(normalized.length() - 1 - i)) {
-                isPalindrome = false;
-                break;
+// Strategy Interface
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+// Stack based Strategy Implementation
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        // Create a stack
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
+        // Push characters into stack
+        for (char c : input.toCharArray()) {
+            stack.push(c);
+        }
+
+        // Compare by popping from stack
+        for (char c : input.toCharArray()) {
+            if (c != stack.pop()) {
+                return false;
             }
         }
 
-        System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + isPalindrome);
+        return true;
     }
 }
