@@ -1,34 +1,33 @@
-import java.util.Queue;
-import java.util.LinkedList;
-import java.util.Stack;
+import java.util.*;
 
-public class UseCase6PalindromeCheckerApp {
+public class PalindromeCheckerApp {
+    static void main() {
+        String input = "refer";
 
-    public static void main(String[] args) {
+        // Create a Deque to store characters
+        Deque<Character> deque = new ArrayDeque<>();
 
-        String input = "civic";
-
-        Queue<Character> queue = new LinkedList<>();
-
-        Stack<Character> stack = new Stack<>();
-
+        // Add each character to the deque
         for (char c : input.toCharArray()) {
-            queue.add(c);     // Enqueue
-            stack.push(c);    // Push
+            deque.addLast(c);
         }
 
-
+        // Flag to track palindrome result
         boolean isPalindrome = true;
 
+        // Continue comparison while more than one element exists
+        while (deque.size() > 1) {
 
-        while (!queue.isEmpty()) {
-            if (queue.remove() != stack.pop()) {  // Dequeue vs Pop
+            char first = deque.removeFirst();
+            char last = deque.removeLast();
+
+            if (first != last) {
                 isPalindrome = false;
                 break;
             }
         }
 
-
+        // Print result
         System.out.println("Input : " + input);
         System.out.println("Is Palindrome? : " + isPalindrome);
     }
